@@ -1,2 +1,11 @@
 # PERN-STACK-CRUD
-Creating a full stack web application using PERN STACK (PostgreSQL, Express.js, React and Node.js)
+
+<img width="50%" src="https://i.postimg.cc/Bv7y9rzj/PERN-STACK-CRUD.png" />
+
+## INTRODUCTION
+
+## TECHNOLOGIES
+
+## INSTALLATION
+
+## EXECUTION
