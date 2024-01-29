@@ -10,7 +10,15 @@ const getAllTasks = async (req, res) => {
 }
 
 const getTask = async (req, res) => {
-	res.send('retrieve a task')
+	try {
+		const { id } = req.params
+		const task = await pool.query('SELECT * FROM task WHERE id=$1', [id])
+		return task.rows.length === 0
+			? res.status(404).json({ message: 'Task not found' })
+			: res.status(200).json(task.rows[0])
+	} catch (error) {
+		res.status(500).json({ message: error.message })
+	}
 }
 
 const createTask = async (req, res) => {
@@ -26,11 +34,11 @@ const createTask = async (req, res) => {
 	}
 }
 
-const updateTask = (req, res) => {
+const updateTask = async (req, res) => {
 	res.send('update a task')
 }
 
-const deleteTask = (req, res) => {
+const deleteTask = async (req, res) => {
 	res.send('delete a task')
 }
 
