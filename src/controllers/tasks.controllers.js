@@ -1,7 +1,12 @@
 const pool = require('../db')
 
 const getAllTasks = async (req, res) => {
-	res.send('retrieve all tasks')
+	try {
+		const allTasks = await pool.query('SELECT * FROM task')
+		res.status(200).json(allTasks.rows)
+	} catch (error) {
+		res.status(500).json({ message: error.message })
+	}
 }
 
 const getTask = async (req, res) => {
@@ -11,12 +16,11 @@ const getTask = async (req, res) => {
 const createTask = async (req, res) => {
 	const { title, description } = req.body
 	try {
-		const result = await pool.query(
+		const newTask = await pool.query(
 			'INSERT INTO task(title, description) VALUES ($1, $2) RETURNING *',
 			[title, description]
 		)
-		console.log(result)
-		res.status(200).json(result.rows[0])
+		res.status(200).json(newTask.rows[0])
 	} catch (error) {
 		res.status(500).json({ message: error.message })
 	}
