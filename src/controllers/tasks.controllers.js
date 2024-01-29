@@ -1,15 +1,15 @@
 const pool = require('../db')
 
-const getAllTasks = async (req, res) => {
+const getAllTasks = async (req, res, next) => {
 	try {
 		const allTasks = await pool.query('SELECT * FROM task')
 		res.status(200).json(allTasks.rows)
 	} catch (error) {
-		res.status(500).json({ message: error.message })
+		next(error)
 	}
 }
 
-const getTask = async (req, res) => {
+const getTask = async (req, res, next) => {
 	try {
 		const { id } = req.params
 		const task = await pool.query('SELECT * FROM task WHERE id=$1', [id])
@@ -17,11 +17,11 @@ const getTask = async (req, res) => {
 			? res.status(404).json({ message: 'Task not found' })
 			: res.status(200).json(task.rows[0])
 	} catch (error) {
-		res.status(500).json({ message: error.message })
+		next(error)
 	}
 }
 
-const createTask = async (req, res) => {
+const createTask = async (req, res, next) => {
 	const { title, description } = req.body
 	try {
 		const newTask = await pool.query(
@@ -30,11 +30,11 @@ const createTask = async (req, res) => {
 		)
 		res.status(200).json(newTask.rows[0])
 	} catch (error) {
-		res.status(500).json({ message: error.message })
+		next(error)
 	}
 }
 
-const updateTask = async (req, res) => {
+const updateTask = async (req, res, next) => {
 	try {
 		const { id } = req.params
 		const { title, description } = req.body
@@ -46,11 +46,11 @@ const updateTask = async (req, res) => {
 			? res.status(404).json({ message: 'Task not found' })
 			: res.status(200).json(task.rows[0])
 	} catch (error) {
-		res.status(500).json({ message: error.message })
+		next(error)
 	}
 }
 
-const deleteTask = async (req, res) => {
+const deleteTask = async (req, res, next) => {
 	try {
 		const { id } = req.params
 		const task = await pool.query('DELETE FROM task WHERE id=$1', [id])
@@ -58,7 +58,7 @@ const deleteTask = async (req, res) => {
 			? res.status(404).json({ message: 'Task not found' })
 			: res.status(204).json({ message: 'Task successfully removed' })
 	} catch (error) {
-		res.status(500).json({ message: error.message })
+		next(error)
 	}
 }
 
