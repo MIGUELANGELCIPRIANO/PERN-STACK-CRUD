@@ -24,7 +24,7 @@ export default function Navbar() {
 						<Button
 							variant='contained'
 							color='primary'
-							onClick={() => navigate('/task/new')}
+							onClick={() => navigate('/tasks/new')}
 						>
 							New Task
 						</Button>
