@@ -25,12 +25,12 @@ export default function TaskForm() {
 
 		setLoading(true)
 
-		const res = await fetch('http://localhost:4000/tasks', {
+		const response = await fetch('http://localhost:4000/tasks', {
 			method: 'POST',
 			body: JSON.stringify(task),
 			headers: { 'Content-Type': 'application/json' },
 		})
-		console.log(res)
+		console.log(response)
 
 		setLoading(false)
 		navigate('/')
