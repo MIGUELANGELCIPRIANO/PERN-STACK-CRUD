@@ -9,6 +9,14 @@ export default function TaskList() {
 		const data = await response.json()
 		setTasks(data)
 	}
+
+	const handleDelete = async (id) => {
+		await fetch(`http://localhost:4000/tasks/${id}`, {
+			method: 'DELETE',
+		})
+		setTasks(tasks.filter((task) => task.id !== id))
+	}
+
 	useEffect(() => {
 		loadTask()
 	}, [])
@@ -39,7 +47,7 @@ export default function TaskList() {
 							<Button
 								variant='contained'
 								color='error'
-								onClick={() => console.log('delete')}
+								onClick={() => handleDelete(task.id)}
 								style={{ marginLeft: '.5rem' }}
 							>
 								Delete
