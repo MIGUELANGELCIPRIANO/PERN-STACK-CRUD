@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Button, Card, CardContent, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 export default function TaskList() {
 	const [tasks, setTasks] = useState([])
+	const navigate = useNavigate()
 
-	const loadTask = async () => {
+	const loadTasks = async () => {
 		const response = await fetch('http://localhost:4000/tasks')
 		const data = await response.json()
 		setTasks(data)
@@ -18,14 +20,17 @@ export default function TaskList() {
 	}
 
 	useEffect(() => {
-		loadTask()
+		loadTasks()
 	}, [])
 
 	return (
 		<>
 			<h1>Task List</h1>
 			{tasks.map((task) => (
-				<Card style={{ marginBottom: '.7rem', backgroundColor: '#1e272e' }}>
+				<Card
+					key={task.id}
+					style={{ marginBottom: '.7rem', backgroundColor: '#1e272e' }}
+				>
 					<CardContent
 						style={{
 							display: 'flex',
@@ -40,7 +45,7 @@ export default function TaskList() {
 							<Button
 								variant='contained'
 								color='primary'
-								onClick={() => console.log('edit')}
+								onClick={() => navigate(`/tasks/${task.id}/edit`)}
 							>
 								Edit
 							</Button>
