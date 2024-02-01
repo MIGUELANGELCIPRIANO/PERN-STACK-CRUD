@@ -1,7 +1,7 @@
 {
 	"name": "pern-stack-crud",
 	"version": "1.0.0",
-	"description": "Creating a full stack web application using PERN STACK (PostgreSQL, Express.js, React and Node.js)",
+	"description": "Creating a full stack web application using PERN STACK (PostgreSQL, Express.js, React and Node.js) and Material UI",
 	"main": "index.js",
 	"scripts": {
 		"start": "node src/index.js",
