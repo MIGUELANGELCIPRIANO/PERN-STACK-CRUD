@@ -1,6 +1,6 @@
 # PERN-STACK-CRUD
 
-<img width="50%" src="https://i.postimg.cc/qBQzyQW1/PERN-STACK-CRUD.png" />
+<img width="50%" src="./images/pern_stack_crud.png" />
 
 ## INTRODUCTION
 
